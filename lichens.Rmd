@@ -1,0 +1,151 @@
+---
+title: "Lichens"
+author: "Karen Kyutoku"
+date: "2022/3/9"
+output: 
+  html_document: 
+    keep_md: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+#install.packages("tidyverse")
+#install.packages("here")
+#install.packages("janitor")
+#install.packages("ggthemes")
+#install.packages("RColorBrewer")
+#install.packages("paletteer")
+#install.packages("skimr")
+#install.packages("nanitor")
+```
+```{r}
+library(tidyverse)
+library(here)
+library(janitor)
+library(ggthemes)
+library(RColorBrewer)
+library(paletteer)
+library(skimr)
+library(naniar)
+```
+
+```{r}
+getwd()
+```
+
+```{r}
+lichen_data <- read_csv(here("data", "occurrences.csv")) %>% clean_names()
+```
+```{r}
+lichen_data
+```
+```{r}
+lichens <- lichen_data %>% 
+ select("class", "family", "scientific_name", "genus", "year", "country", "state_province", "county")
+lichens
+```
+```{r}
+lichens %>% 
+  filter(state_province=="California") %>% 
+  group_by(year) %>% 
+  summarize(n=n()) %>% 
+  ggplot(aes(x=year, y=n))+
+  geom_line()+
+  theme(axis.text.x = element_text(angle= 60, hjust=1))+
+  labs(title = "Number of DAV lichens collected in California",
+       x="Year",
+       y="Total number of lichens")
+  
+```
+```{r}
+lichens %>% 
+  count(genus) %>% 
+  arrange(desc(n))
+```
+```{r}
+lichens <- lichens %>% 
+  na_if("Lichen") %>% 
+  mutate(family=na_if(family, ("Lichen")))
+lichens
+```
+```{r}
+naniar::miss_var_summary(lichens)
+```
+```{r}
+lichens %>% 
+  filter(state_province == "California") %>% 
+  count(family) %>% 
+  arrange(desc(n))
+```
+
+```{r}
+lichens %>% 
+  filter(state_province=="California") %>% 
+  ggplot(aes(x= year, fill= family))+
+  geom_bar(position="dodge")+
+  coord_flip()+
+  labs(title = "Observations by Family in DAV Lichen Data",
+       x = "Year",
+       y = "Total",
+       fill = "Family")
+```
+
+```{r}
+lichens %>% 
+  filter(state_province=="California") %>% 
+  ggplot(aes(x=year, y=family, fill= family))+
+  geom_boxplot()
+```
+
+```{r}
+lichens %>% 
+  filter(state_province=="California") %>% 
+  ggplot(aes(x= year, fill= class))+
+  geom_bar(position="dodge")+
+  labs(title = "Observations by Class in DAV Lichen Data",
+       x = "Year",
+       y = "Total",
+       fill = "class")
+```
+```{r}
+lichens %>% 
+  count(country) %>% 
+  arrange(desc(n))
+```
+```{r}
+lichens %>% 
+  filter(state_province=="California") %>% 
+  count(county) %>% 
+  arrange(desc(n))
+```
+
+```{r}
+lichens %>% 
+  filter(state_province=="California") %>% 
+  ggplot(aes(x= county, fill= county))+
+  geom_bar(position="dodge")+
+  labs(title = "Number of Lichens Collected from Different Counties in California",
+       x = "County",
+       y = "Number of Lichens")
+```
+
+```{r}
+berkeley_lichen <- read_csv(here("data", "occurrences_berkeley.csv")) %>% clean_names()
+```
+
+```{r}
+berkeley_lichen %>% 
+  filter(state_province=="California") %>% 
+  group_by(year) %>% 
+  summarize(n=n()) %>% 
+  ggplot(aes(x=year, y=n))+
+  geom_line()+
+  theme(axis.text.x = element_text(angle= 60, hjust=1))+
+  labs(title = "Number of UC lichens collected in California",
+       x="Year",
+       y="Total number of lichens")
+```
+
