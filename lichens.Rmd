@@ -127,6 +127,7 @@ lichens %>%
   filter(state_province=="California") %>% 
   ggplot(aes(x= county, fill= county))+
   geom_bar(position="dodge")+
+  coord_flip()+
   labs(title = "Number of Lichens Collected from Different Counties in California",
        x = "County",
        y = "Number of Lichens")
