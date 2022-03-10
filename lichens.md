@@ -428,3 +428,4 @@ berkeley_lichen %>%
 
 ![](lichens_files/figure-html/unnamed-chunk-19-1.png)<!-- -->
 
+
