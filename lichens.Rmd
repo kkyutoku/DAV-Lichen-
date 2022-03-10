@@ -44,9 +44,48 @@ lichen_data
 ```
 ```{r}
 lichens <- lichen_data %>% 
- select("class", "family", "scientific_name", "genus", "year", "country", "state_province", "county")
+ select("class", "family", "scientific_name", "genus", "year", "recorded_by", "country", "state_province", "county")
 lichens
 ```
+```{r}
+lichens %>% 
+  count(year) %>% 
+  arrange(desc(n))
+```
+1975, 1971, 1979, 2017 = over 100 lichens are collected
+
+```{r}
+lichens %>% 
+  filter(year=="1975") %>% 
+  count(recorded_by) %>% 
+  arrange(desc(n))
+```
+Major contributers in 1975 = D. Showers & W. A. Weber
+
+```{r}
+lichens %>% 
+  filter(year=="1971") %>% 
+  count(recorded_by) %>% 
+  arrange(desc(n))
+```
+Major contributer in 1971 = Richard A. Bernhard (mostly collected in the United Kingdom)
+
+```{r}
+lichens %>% 
+  filter(year=="1979") %>% 
+  count(recorded_by) %>% 
+  arrange(desc(n))
+```
+Major contributer in 1979 = G. H. Snodgrass
+
+```{r}
+lichens %>% 
+  filter(year=="2017") %>% 
+  count(recorded_by) %>% 
+  arrange(desc(n))
+```
+Major contributers in 2017 = Christopher Adlam & Alliee Weill
+
 ```{r}
 lichens %>% 
   filter(state_province=="California") %>% 
