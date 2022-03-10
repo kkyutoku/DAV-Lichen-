@@ -37,7 +37,7 @@ getwd()
 ```
 
 ```{r}
-lichen_data <- read_csv(here("data", "occurrences.csv")) %>% clean_names()
+lichen_data <- read_csv(here("occurrences.csv")) %>% clean_names()
 ```
 ```{r}
 lichen_data
@@ -134,7 +134,7 @@ lichens %>%
 ```
 
 ```{r}
-berkeley_lichen <- read_csv(here("data", "occurrences_berkeley.csv")) %>% clean_names()
+berkeley_lichen <- read_csv(here("occurrences_berkeley.csv")) %>% clean_names()
 ```
 
 ```{r}

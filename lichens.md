@@ -47,7 +47,7 @@ library(here)
 ```
 
 ```
-## here() starts at C:/Users/KAREN/Documents/DAV-Lichens
+## here() starts at C:/Users/KAREN/Documents/DAV-Lichens/data
 ```
 
 ```r
@@ -90,12 +90,12 @@ getwd()
 ```
 
 ```
-## [1] "C:/Users/KAREN/Documents/DAV-Lichens"
+## [1] "C:/Users/KAREN/Documents/DAV-Lichens/data"
 ```
 
 
 ```r
-lichen_data <- read_csv(here("data", "occurrences.csv")) %>% clean_names()
+lichen_data <- read_csv(here("occurrences.csv")) %>% clean_names()
 ```
 
 ```
@@ -377,6 +377,7 @@ lichens %>%
   filter(state_province=="California") %>% 
   ggplot(aes(x= county, fill= county))+
   geom_bar(position="dodge")+
+  coord_flip()+
   labs(title = "Number of Lichens Collected from Different Counties in California",
        x = "County",
        y = "Number of Lichens")
@@ -386,7 +387,7 @@ lichens %>%
 
 
 ```r
-berkeley_lichen <- read_csv(here("data", "occurrences_berkeley.csv")) %>% clean_names()
+berkeley_lichen <- read_csv(here("occurrences_berkeley.csv")) %>% clean_names()
 ```
 
 ```
