@@ -67,6 +67,22 @@ lichens %>%
 
 ```{r}
 lichens %>% 
+  filter(year=="2001") %>% 
+  count(recorded_by) %>% 
+  arrange(desc(n))
+```
+
+
+```{r}
+lichens %>% 
+  filter(year=="1970") %>% 
+  count(recorded_by) %>% 
+  arrange(desc(n))
+```
+
+
+```{r}
+lichens %>% 
   filter(year=="1975") %>% 
   count(recorded_by) %>% 
   arrange(desc(n))
@@ -133,7 +149,7 @@ lichens %>%
   ggplot(aes(x=year, y=n))+
   geom_line()+
   theme(axis.text.x = element_text(angle= 60, hjust=1))+
-  labs(title = "DAV Lichens (1908-2002)",
+  labs(title = "DAV Lichens (1908-2021)",
        x="Year",
        y="Total number of lichens")
 ```

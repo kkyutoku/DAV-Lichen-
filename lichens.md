@@ -240,6 +240,47 @@ lichens %>%
 
 ```r
 lichens %>% 
+  filter(year=="2001") %>% 
+  count(recorded_by) %>% 
+  arrange(desc(n))
+```
+
+```
+## # A tibble: 3 x 2
+##   recorded_by        n
+##   <chr>          <int>
+## 1 Alison Colwell    50
+## 2 Shirley Tucker     6
+## 3 R. Weiss           3
+```
+
+
+
+```r
+lichens %>% 
+  filter(year=="1970") %>% 
+  count(recorded_by) %>% 
+  arrange(desc(n))
+```
+
+```
+## # A tibble: 8 x 2
+##   recorded_by           n
+##   <chr>             <int>
+## 1 D. S. Horning        57
+## 2 B. J. Donovan        16
+## 3 Jack Major           13
+## 4 G. W. Ramsay          4
+## 5 C. J. Horning         2
+## 6 A. G. Harrison        1
+## 7 D. S. Hornung Jr.     1
+## 8 M. E. Miller          1
+```
+
+
+
+```r
+lichens %>% 
   filter(year=="1975") %>% 
   count(recorded_by) %>% 
   arrange(desc(n))
@@ -412,7 +453,7 @@ lichens %>%
 ## Warning: Removed 1 row(s) containing missing values (geom_path).
 ```
 
-![](lichens_files/figure-html/unnamed-chunk-16-1.png)<!-- -->
+![](lichens_files/figure-html/unnamed-chunk-18-1.png)<!-- -->
 
 ```r
 lichens %>% 
@@ -421,7 +462,7 @@ lichens %>%
   ggplot(aes(x=year, y=n))+
   geom_line()+
   theme(axis.text.x = element_text(angle= 60, hjust=1))+
-  labs(title = "DAV Lichens (1908-2002)",
+  labs(title = "DAV Lichens (1908-2021)",
        x="Year",
        y="Total number of lichens")
 ```
@@ -430,7 +471,7 @@ lichens %>%
 ## Warning: Removed 1 row(s) containing missing values (geom_path).
 ```
 
-![](lichens_files/figure-html/unnamed-chunk-17-1.png)<!-- -->
+![](lichens_files/figure-html/unnamed-chunk-19-1.png)<!-- -->
 
 
 ```r
@@ -541,7 +582,7 @@ lichens %>%
 ## Warning: Removed 17 rows containing non-finite values (stat_count).
 ```
 
-![](lichens_files/figure-html/unnamed-chunk-22-1.png)<!-- -->
+![](lichens_files/figure-html/unnamed-chunk-24-1.png)<!-- -->
 
 
 ```r
@@ -555,7 +596,7 @@ lichens %>%
 ## Warning: Removed 17 rows containing non-finite values (stat_boxplot).
 ```
 
-![](lichens_files/figure-html/unnamed-chunk-23-1.png)<!-- -->
+![](lichens_files/figure-html/unnamed-chunk-25-1.png)<!-- -->
 
 
 ```r
@@ -573,7 +614,7 @@ lichens %>%
 ## Warning: Removed 17 rows containing non-finite values (stat_count).
 ```
 
-![](lichens_files/figure-html/unnamed-chunk-24-1.png)<!-- -->
+![](lichens_files/figure-html/unnamed-chunk-26-1.png)<!-- -->
 
 ```r
 lichens %>% 
@@ -634,7 +675,7 @@ lichens %>%
        y = "Number of Lichens")
 ```
 
-![](lichens_files/figure-html/unnamed-chunk-27-1.png)<!-- -->
+![](lichens_files/figure-html/unnamed-chunk-29-1.png)<!-- -->
 
 
 ```r
@@ -677,6 +718,6 @@ berkeley_lichen %>%
 ## Warning: Removed 1 row(s) containing missing values (geom_path).
 ```
 
-![](lichens_files/figure-html/unnamed-chunk-29-1.png)<!-- -->
+![](lichens_files/figure-html/unnamed-chunk-31-1.png)<!-- -->
 
 
