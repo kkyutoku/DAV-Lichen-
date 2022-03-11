@@ -498,6 +498,55 @@ lichens %>%
 ```
 
 ```r
+lichens %>% 
+  filter(state_province=="California") %>% 
+  count(genus) %>% 
+  arrange(desc(n))
+```
+
+```
+## # A tibble: 137 x 2
+##    genus          n
+##    <chr>      <int>
+##  1 Ramalina      50
+##  2 <NA>          36
+##  3 Cladonia      35
+##  4 Lecanora      34
+##  5 Xanthoria     28
+##  6 Physconia     27
+##  7 Hypogymnia    24
+##  8 Usnea         24
+##  9 Caloplaca     20
+## 10 Leptogium     20
+## # ... with 127 more rows
+```
+
+```r
+lichens %>% 
+  filter(county=="Mendocino") %>% 
+  count(genus) %>% 
+  arrange(desc(n))
+```
+
+```
+## # A tibble: 47 x 2
+##    genus           n
+##    <chr>       <int>
+##  1 Cladonia        8
+##  2 Hypogymnia      4
+##  3 Pannaria        4
+##  4 Ramalina        4
+##  5 Ochrolechia     3
+##  6 Parmelia        3
+##  7 Parmotrema      3
+##  8 Platismatia     3
+##  9 Usnea           3
+## 10 Nephroma        2
+## # ... with 37 more rows
+```
+
+
+```r
 lichens <- lichens %>% 
   na_if("Lichen") %>% 
   mutate(family=na_if(family, ("Lichen")))
@@ -582,7 +631,7 @@ lichens %>%
 ## Warning: Removed 17 rows containing non-finite values (stat_count).
 ```
 
-![](lichens_files/figure-html/unnamed-chunk-24-1.png)<!-- -->
+![](lichens_files/figure-html/unnamed-chunk-26-1.png)<!-- -->
 
 
 ```r
@@ -596,7 +645,7 @@ lichens %>%
 ## Warning: Removed 17 rows containing non-finite values (stat_boxplot).
 ```
 
-![](lichens_files/figure-html/unnamed-chunk-25-1.png)<!-- -->
+![](lichens_files/figure-html/unnamed-chunk-27-1.png)<!-- -->
 
 
 ```r
@@ -614,7 +663,7 @@ lichens %>%
 ## Warning: Removed 17 rows containing non-finite values (stat_count).
 ```
 
-![](lichens_files/figure-html/unnamed-chunk-26-1.png)<!-- -->
+![](lichens_files/figure-html/unnamed-chunk-28-1.png)<!-- -->
 
 ```r
 lichens %>% 
@@ -675,7 +724,7 @@ lichens %>%
        y = "Number of Lichens")
 ```
 
-![](lichens_files/figure-html/unnamed-chunk-29-1.png)<!-- -->
+![](lichens_files/figure-html/unnamed-chunk-31-1.png)<!-- -->
 
 
 ```r
@@ -718,6 +767,6 @@ berkeley_lichen %>%
 ## Warning: Removed 1 row(s) containing missing values (geom_path).
 ```
 
-![](lichens_files/figure-html/unnamed-chunk-31-1.png)<!-- -->
+![](lichens_files/figure-html/unnamed-chunk-33-1.png)<!-- -->
 
 

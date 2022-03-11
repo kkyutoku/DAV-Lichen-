@@ -493,6 +493,42 @@ lichens</code></pre>
 ##  9 Umbilicaria    36
 ## 10 Lecidea        33
 ## # ... with 184 more rows</code></pre>
+<pre class="r"><code>lichens %&gt;% 
+  filter(state_province==&quot;California&quot;) %&gt;% 
+  count(genus) %&gt;% 
+  arrange(desc(n))</code></pre>
+<pre><code>## # A tibble: 137 x 2
+##    genus          n
+##    &lt;chr&gt;      &lt;int&gt;
+##  1 Ramalina      50
+##  2 &lt;NA&gt;          36
+##  3 Cladonia      35
+##  4 Lecanora      34
+##  5 Xanthoria     28
+##  6 Physconia     27
+##  7 Hypogymnia    24
+##  8 Usnea         24
+##  9 Caloplaca     20
+## 10 Leptogium     20
+## # ... with 127 more rows</code></pre>
+<pre class="r"><code>lichens %&gt;% 
+  filter(county==&quot;Mendocino&quot;) %&gt;% 
+  count(genus) %&gt;% 
+  arrange(desc(n))</code></pre>
+<pre><code>## # A tibble: 47 x 2
+##    genus           n
+##    &lt;chr&gt;       &lt;int&gt;
+##  1 Cladonia        8
+##  2 Hypogymnia      4
+##  3 Pannaria        4
+##  4 Ramalina        4
+##  5 Ochrolechia     3
+##  6 Parmelia        3
+##  7 Parmotrema      3
+##  8 Platismatia     3
+##  9 Usnea           3
+## 10 Nephroma        2
+## # ... with 37 more rows</code></pre>
 <pre class="r"><code>lichens &lt;- lichens %&gt;% 
   na_if(&quot;Lichen&quot;) %&gt;% 
   mutate(family=na_if(family, (&quot;Lichen&quot;)))

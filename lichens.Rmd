@@ -160,6 +160,19 @@ lichens %>%
   arrange(desc(n))
 ```
 ```{r}
+lichens %>% 
+  filter(state_province=="California") %>% 
+  count(genus) %>% 
+  arrange(desc(n))
+```
+```{r}
+lichens %>% 
+  filter(county=="Mendocino") %>% 
+  count(genus) %>% 
+  arrange(desc(n))
+```
+
+```{r}
 lichens <- lichens %>% 
   na_if("Lichen") %>% 
   mutate(family=na_if(family, ("Lichen")))
