@@ -49,6 +49,17 @@ lichens
 ```
 ```{r}
 lichens %>% 
+  count(scientific_name) %>% 
+  arrange(desc(n))
+```
+```{r}
+lichens %>% 
+  group_by(year) %>% 
+  arrange()
+```
+
+```{r}
+lichens %>% 
   count(year) %>% 
   arrange(desc(n))
 ```
@@ -88,6 +99,22 @@ Major contributers in 2017 = Christopher Adlam & Alliee Weill
 
 ```{r}
 lichens %>% 
+  filter(year=="1966") %>% 
+  count(recorded_by) %>% 
+  arrange(desc(n))
+```
+
+
+```{r}
+lichens %>% 
+  filter(state_province=="California") %>% 
+  count(year) %>% 
+  arrange(desc(n))
+```
+
+
+```{r}
+lichens %>% 
   filter(state_province=="California") %>% 
   group_by(year) %>% 
   summarize(n=n()) %>% 
@@ -99,6 +126,18 @@ lichens %>%
        y="Total number of lichens")
   
 ```
+```{r}
+lichens %>% 
+  group_by(year) %>% 
+  summarize(n=n()) %>% 
+  ggplot(aes(x=year, y=n))+
+  geom_line()+
+  theme(axis.text.x = element_text(angle= 60, hjust=1))+
+  labs(title = "DAV Lichens (1908-2002)",
+       x="Year",
+       y="Total number of lichens")
+```
+
 ```{r}
 lichens %>% 
   count(genus) %>% 
@@ -113,6 +152,7 @@ lichens
 ```{r}
 naniar::miss_var_summary(lichens)
 ```
+
 ```{r}
 lichens %>% 
   filter(state_province == "California") %>% 

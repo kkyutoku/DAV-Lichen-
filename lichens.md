@@ -167,6 +167,54 @@ lichens
 
 ```r
 lichens %>% 
+  count(scientific_name) %>% 
+  arrange(desc(n))
+```
+
+```
+## # A tibble: 762 x 2
+##    scientific_name               n
+##    <chr>                     <int>
+##  1 <NA>                         55
+##  2 Flavoparmelia caperata       19
+##  3 Evernia prunastri            16
+##  4 Ramalina menziesii           16
+##  5 Ramalina farinacea           15
+##  6 Flavopunctelia flaventior    14
+##  7 Hypogymnia physodes          14
+##  8 Xanthoria polycarpa          14
+##  9 Letharia vulpina             13
+## 10 Parmelia sulcata             13
+## # ... with 752 more rows
+```
+
+```r
+lichens %>% 
+  group_by(year) %>% 
+  arrange()
+```
+
+```
+## # A tibble: 1,628 x 9
+## # Groups:   year [73]
+##    class   family scientific_name genus  year recorded_by country state_province
+##    <chr>   <chr>  <chr>           <chr> <dbl> <chr>       <chr>   <chr>         
+##  1 Lecano~ Colle~ Collema nigres~ Coll~  2017 Beth Beyer  United~ California    
+##  2 Lecano~ Clado~ Cladonia squam~ Clad~  2017 Benjamin M~ USA     California    
+##  3 Lecano~ Clado~ Cladonia squam~ Clad~  2017 Lana Sayka~ USA     California    
+##  4 Lecano~ Parme~ Evernia prunas~ Ever~  2017 Emma Hanse~ USA     California    
+##  5 Lecano~ Parme~ Evernia prunas~ Ever~  2017 Lana Sayka~ USA     California    
+##  6 Lecano~ Parme~ Flavoparmelia ~ Flav~  2017 Allie Weill USA     California    
+##  7 Lecano~ Colle~ Collema nigres~ Coll~  2017 Beth Beyer  USA     California    
+##  8 Lecano~ Parme~ Flavopunctelia~ Flav~  2017 Beth Beyer  USA     California    
+##  9 Lecano~ Parme~ Flavopunctelia~ Flav~  2017 Emma Hanse~ USA     California    
+## 10 Lecano~ Parme~ Flavopunctelia~ Flav~  2017 Benajmin M~ USA     California    
+## # ... with 1,618 more rows, and 1 more variable: county <chr>
+```
+
+
+```r
+lichens %>% 
   count(year) %>% 
   arrange(desc(n))
 ```
@@ -297,6 +345,58 @@ Major contributers in 2017 = Christopher Adlam & Alliee Weill
 
 ```r
 lichens %>% 
+  filter(year=="1966") %>% 
+  count(recorded_by) %>% 
+  arrange(desc(n))
+```
+
+```
+## # A tibble: 11 x 2
+##    recorded_by           n
+##    <chr>             <int>
+##  1 Shirley Tucker       44
+##  2 Shirley C. Tucker    20
+##  3 Roman Gankin          7
+##  4 Hugh Dale             3
+##  5 June McCaskill        2
+##  6 F. Parker             1
+##  7 John Tucker           1
+##  8 Nancy Dengler         1
+##  9 Ron Dengler           1
+## 10 Ronald Dengler        1
+## 11 Walter Russell        1
+```
+
+
+
+```r
+lichens %>% 
+  filter(state_province=="California") %>% 
+  count(year) %>% 
+  arrange(desc(n))
+```
+
+```
+## # A tibble: 45 x 2
+##     year     n
+##    <dbl> <int>
+##  1  1975   169
+##  2  2017   107
+##  3  1979   106
+##  4  1966    81
+##  5  1978    70
+##  6  2000    46
+##  7  1996    24
+##  8  1969    21
+##  9  1965    19
+## 10  1997    19
+## # ... with 35 more rows
+```
+
+
+
+```r
+lichens %>% 
   filter(state_province=="California") %>% 
   group_by(year) %>% 
   summarize(n=n()) %>% 
@@ -312,7 +412,26 @@ lichens %>%
 ## Warning: Removed 1 row(s) containing missing values (geom_path).
 ```
 
-![](lichens_files/figure-html/unnamed-chunk-12-1.png)<!-- -->
+![](lichens_files/figure-html/unnamed-chunk-16-1.png)<!-- -->
+
+```r
+lichens %>% 
+  group_by(year) %>% 
+  summarize(n=n()) %>% 
+  ggplot(aes(x=year, y=n))+
+  geom_line()+
+  theme(axis.text.x = element_text(angle= 60, hjust=1))+
+  labs(title = "DAV Lichens (1908-2002)",
+       x="Year",
+       y="Total number of lichens")
+```
+
+```
+## Warning: Removed 1 row(s) containing missing values (geom_path).
+```
+
+![](lichens_files/figure-html/unnamed-chunk-17-1.png)<!-- -->
+
 
 ```r
 lichens %>% 
@@ -380,6 +499,7 @@ naniar::miss_var_summary(lichens)
 ## 9 recorded_by          6    0.369
 ```
 
+
 ```r
 lichens %>% 
   filter(state_province == "California") %>% 
@@ -421,7 +541,7 @@ lichens %>%
 ## Warning: Removed 17 rows containing non-finite values (stat_count).
 ```
 
-![](lichens_files/figure-html/unnamed-chunk-17-1.png)<!-- -->
+![](lichens_files/figure-html/unnamed-chunk-22-1.png)<!-- -->
 
 
 ```r
@@ -435,7 +555,7 @@ lichens %>%
 ## Warning: Removed 17 rows containing non-finite values (stat_boxplot).
 ```
 
-![](lichens_files/figure-html/unnamed-chunk-18-1.png)<!-- -->
+![](lichens_files/figure-html/unnamed-chunk-23-1.png)<!-- -->
 
 
 ```r
@@ -453,7 +573,7 @@ lichens %>%
 ## Warning: Removed 17 rows containing non-finite values (stat_count).
 ```
 
-![](lichens_files/figure-html/unnamed-chunk-19-1.png)<!-- -->
+![](lichens_files/figure-html/unnamed-chunk-24-1.png)<!-- -->
 
 ```r
 lichens %>% 
@@ -514,7 +634,7 @@ lichens %>%
        y = "Number of Lichens")
 ```
 
-![](lichens_files/figure-html/unnamed-chunk-22-1.png)<!-- -->
+![](lichens_files/figure-html/unnamed-chunk-27-1.png)<!-- -->
 
 
 ```r
@@ -557,6 +677,6 @@ berkeley_lichen %>%
 ## Warning: Removed 1 row(s) containing missing values (geom_path).
 ```
 
-![](lichens_files/figure-html/unnamed-chunk-24-1.png)<!-- -->
+![](lichens_files/figure-html/unnamed-chunk-29-1.png)<!-- -->
 
 
